@@ -24,7 +24,6 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 # Configure users/groups
 RUN usermod -u ${UID} www-data && groupmod -g ${GID} www-data
-RUN useradd -m -s /bin/bash -g www-data ${USER}
 
 # Apache modules
 RUN a2enmod rewrite headers
