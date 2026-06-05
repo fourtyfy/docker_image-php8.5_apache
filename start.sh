@@ -1,6 +1,7 @@
 #!/bin/sh
 
 chown -R www-data:www-data /var/www
+chmod -R 777 /var/www/html
 cd /var/www/html
 
 if [ -f composer.json ]; then
