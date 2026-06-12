@@ -1,9 +1,5 @@
 FROM php:8.5-apache
 
-ENV UID=1000
-ENV GID=1000
-ENV USER=web
-
 # Install dependencies
 RUN apt-get update && apt-get install -y \
     bash \
@@ -21,9 +17,6 @@ RUN apt-get update && apt-get install -y \
 
 # Install Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
-
-# Configure users/groups
-RUN usermod -u ${UID} www-data && groupmod -g ${GID} www-data
 
 # Apache modules
 RUN a2enmod rewrite headers
