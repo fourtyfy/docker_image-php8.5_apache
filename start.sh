@@ -1,7 +1,22 @@
 #!/bin/sh
+set -e
+
+UID=${UID:-1000}
+GID=${GID:-1000}
+
+CURRENT_UID=$(id -u www-data)
+CURRENT_GID=$(id -g www-data)
+
+if [ "$CURRENT_GID" != "$GID" ]; then
+    groupmod -o -g "$GID" www-data
+fi
+
+if [ "$CURRENT_UID" != "$UID" ]; then
+    usermod -o -u "$UID" www-data
+fi
 
 chown -R www-data:www-data /var/www
-chmod -R 777 /var/www/html
+
 cd /var/www/html
 
 if [ -f composer.json ]; then
@@ -9,5 +24,4 @@ if [ -f composer.json ]; then
     composer update
 fi
 
-a2enmod rewrite
-apache2-foreground
+exec apache2-foreground
