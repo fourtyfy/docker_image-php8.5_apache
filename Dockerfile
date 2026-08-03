@@ -11,8 +11,9 @@ RUN apt-get update && apt-get install -y \
     libpng-dev \
     libjpeg62-turbo-dev \
     libfreetype6-dev \
+    libpq-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install intl gd zip exif mysqli pdo_mysql \
+    && docker-php-ext-install intl gd zip exif mysqli pdo_mysql pgsql pdo_pgsql \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Composer
