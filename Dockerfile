@@ -4,6 +4,7 @@ FROM php:8.5-apache
 RUN apt-get update && apt-get install -y \
     bash \
     curl \
+    git \
     imagemagick \
     unzip \
     libicu-dev \
